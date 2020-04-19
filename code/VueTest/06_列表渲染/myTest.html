@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="demo">
+    <h2>测试: v-for 遍历数组</h2>
+    <ul>
+        <li v-for="(p, index) in persons" :key="index">
+            {{index}}--{{p.name}}--{{p.age}}
+            --<button @click="deleteP(index)">删除</button>
+            --<button @click="updateP(index, {name:'Cat', age: 16})">更新</button>
+        </li>
+    </ul>
+    <button @click="addP({name: 'xfzhang', age: 18})">添加</button>
+
+    <h2>测试: v-for 遍历对象</h2>
+
+    <ul>
+        <li v-for="(item, keys) in persons[0]" :key="keys">{{keys}}={{item}}</li>
+        <li v-for="(name,age,sex) in student" :key="key">{{name}}={{age}}={{sex}}</li>
+    </ul>
+
+</div>
+    <script type="text/javascript" src="../js/vue.js">    </script>
+    <script type="text/javascript">
+        const vm = new Vue({
+            el:'#demo',
+            data:{
+                persons: [
+                    {name: 'Tom', age:18},
+                    {name: 'Jack', age:17},
+                    {name: 'Bob', age:19},
+                    {name: 'Mary', age:16}
+                ],
+                student:{name:'我是学生',age:'18',sex:'男'}
+            },
+            methods:{
+                deleteP:function (index) {
+                    this.persons.splice(index, 1)
+                },
+                updateP:function (index,newPerson) {
+                    this.persons.splice(index, 1, newPerson)
+                },
+                addP:function (newPerson) {
+                    this.persons.push(newPerson)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
